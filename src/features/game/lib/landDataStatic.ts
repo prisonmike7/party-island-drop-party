@@ -31,7 +31,7 @@ export const INITIAL_RESOURCES: Pick<
     },
     3: {
       createdAt: Date.now(),
-      crop: { name: "Sunflower", plantedAt: 0, amount: 1 },
+      crop: { name: "Pumpkin", plantedAt: 0, amount: 1 },
       x: 0,
       y: 0,
       height: 1,
@@ -214,17 +214,71 @@ const OFFLINE_FARM_FRUIT = getEnabledNodeCount(
 );
 
 export const STATIC_OFFLINE_FARM: GameState = {
+  home: {
+    collectibles: {
+      Wardrobe: [
+        {
+          id: "a3f26ad7",
+          createdAt: 1704754128378,
+          coordinates: {
+            x: 1,
+            y: 3,
+          },
+          readyAt: 1704754128378,
+        },
+      ],
+      Rug: [
+        {
+          id: "16930e51",
+          createdAt: 1704754143012,
+          coordinates: {
+            x: 0,
+            y: 2,
+          },
+          readyAt: 1704754143012,
+        },
+      ],
+    },
+  },
+  island: {
+    type: "basic",
+  },
   mysteryPrizes: {},
   mushrooms: {
     mushrooms: {},
     spawnedAt: 0,
   },
   bumpkin: INITIAL_BUMPKIN,
+  buds: {
+    1: {
+      aura: "Basic",
+      colour: "Beige",
+      ears: "Ears",
+      stem: "3 Leaf Clover",
+      type: "Beach",
+    },
+    2: {
+      aura: "Basic",
+      colour: "Beige",
+      ears: "Ears",
+      stem: "3 Leaf Clover",
+      type: "Woodlands",
+    },
+  },
   balance: new Decimal(0),
   previousBalance: new Decimal(0),
   previousInventory: {},
   inventory: {
+    "White Festive Fox": new Decimal(3),
+    Scarecrow: new Decimal(1),
+    Shovel: new Decimal(1),
+    Rug: new Decimal(1),
+    Wardrobe: new Decimal(1),
+    "Abandoned Bear": new Decimal(10),
+    "Chef Bear": new Decimal(10),
     "Grinx's Hammer": new Decimal(1),
+    Rod: new Decimal(20),
+    Earthworm: new Decimal(10),
     "Bumpkin Nutcracker": new Decimal(1),
     "Festive Tree": new Decimal(1),
     "Town Center": new Decimal(1),
@@ -242,7 +296,22 @@ export const STATIC_OFFLINE_FARM: GameState = {
     "Block Buck": new Decimal(1),
     Egg: new Decimal(12),
   },
-  wardrobe: {},
+  wardrobe: {
+    "Elf Suit": 1,
+    "Banana Onesie": 1,
+    "Beige Farmer Potion": 2,
+    "Fire Hair": 3,
+    "Basic Hair": 1,
+    "Red Farmer Shirt": 2,
+    "Blue Farmer Shirt": 1,
+    "Brown Suspenders": 1,
+
+    "Black Farmer Boots": 1,
+    "Farmer Pitchfork": 1,
+    "Farm Background": 1,
+    "Santa Beard": 1,
+    "Sunflower Amulet": 2,
+  },
 
   createdAt: new Date().getTime(),
 
@@ -254,6 +323,7 @@ export const STATIC_OFFLINE_FARM: GameState = {
     dailyAttempts: {},
     weather: "Sunny",
     wharf: {},
+    beach: {},
   },
   mailbox: {
     read: [],
@@ -373,7 +443,7 @@ export const STATIC_OFFLINE_FARM: GameState = {
   farmActivity: {},
   milestones: {},
   catchTheKraken: {
-    hunger: "Sunflower",
+    hunger: "Iron",
     weeklyCatches: {},
   },
   airdrops: [],

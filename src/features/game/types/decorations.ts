@@ -83,12 +83,15 @@ export type EventDecorationName =
   | "Time Warp Totem"
   | "Festive Tree"
   | "Bumpkin Nutcracker"
+  | "White Festive Fox"
   | "Grinx's Hammer";
 
 export type PotionHouseDecorationName =
   | "Giant Potato"
   | "Giant Pumpkin"
   | "Giant Cabbage";
+
+export type InteriorDecorationName = "Rug" | "Wardrobe";
 
 export type DecorationName =
   | AchievementDecorationName
@@ -97,9 +100,22 @@ export type DecorationName =
   | DecorationTreasure
   | BoostTreasure
   | SeasonalDecorationName
-  | PotionHouseDecorationName;
+  | PotionHouseDecorationName
+  | InteriorDecorationName;
 
 export const DECORATION_DIMENSIONS: Record<DecorationName, Dimensions> = {
+  Wardrobe: {
+    height: 1,
+    width: 1,
+  },
+  "White Festive Fox": {
+    height: 2,
+    width: 2,
+  },
+  Rug: {
+    height: 3,
+    width: 3,
+  },
   "Grinx's Hammer": {
     height: 1,
     width: 1,

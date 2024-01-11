@@ -41,6 +41,7 @@ import { ConsumableName } from "./consumables";
 import {
   AchievementDecorationName,
   EventDecorationName,
+  InteriorDecorationName,
   PotionHouseDecorationName,
   SeasonalDecorationName,
   ShopDecorationName,
@@ -321,6 +322,7 @@ const buildings: Record<BuildingName, () => boolean> = {
   "Compost Bin": () => false,
   "Turbo Composter": () => false,
   "Premium Composter": () => false,
+  House: () => false,
 };
 
 const fertilisers: Record<FertiliserName, () => boolean> = {
@@ -424,6 +426,9 @@ const consumables: Record<ConsumableName, () => boolean> = {
   Surgeonfish: () => false,
   Tuna: () => false,
   "Banana Blast": () => false,
+  Angelfish: () => false,
+  Halibut: () => false,
+  Parrotfish: () => false,
 };
 
 const decorations: Record<ShopDecorationName, () => boolean> = {
@@ -670,6 +675,7 @@ const eventDecoration: Record<EventDecorationName, () => boolean> = {
   "Bumpkin Nutcracker": () => canWithdrawTimebasedItem(new Date("2023-12-27")),
   "Festive Tree": () => false,
   "Grinx's Hammer": () => true,
+  "White Festive Fox": () => true,
 };
 
 const lanterns: Record<LanternName, () => boolean> = {
@@ -760,6 +766,14 @@ const fish: Record<FishName | MarineMarvelName, () => boolean> = {
   "Phantom Barracuda": () => false,
   "Gilded Swordfish": () => false,
   "Kraken Tentacle": () => false,
+  Angelfish: () => false,
+  Halibut: () => false,
+  Parrotfish: () => false,
+};
+
+const interiors: Record<InteriorDecorationName, () => boolean> = {
+  Rug: () => false,
+  Wardrobe: () => false,
 };
 
 export const WITHDRAWABLES: Record<InventoryItemName, () => boolean> = {
@@ -813,6 +827,7 @@ export const WITHDRAWABLES: Record<InventoryItemName, () => boolean> = {
   ...bait,
   ...compost,
   ...fish,
+  ...interiors,
 };
 
 export const BUMPKIN_WITHDRAWABLES: Record<
@@ -1031,7 +1046,7 @@ export const BUMPKIN_WITHDRAWABLES: Record<
   Halo: () => false,
   Kama: () => true,
   "Grey Merch Hoodie": () => false,
-  "Unicorn Horn": () => false,
+  "Unicorn Horn": () => true,
   "Unicorn Hat": () => false,
   "Feather Hat": () => true,
   "Valoria Wreath": () => true,
@@ -1076,7 +1091,7 @@ export const BUMPKIN_WITHDRAWABLES: Record<
     canWithdrawBoostedWearable("Banana Amulet", state) &&
     canWithdrawTimebasedItem(new Date("2024-01-15")), // Last Auction 2024/01/13 3pm UTC
 
-  "Banana Onesie": () => false,
+  "Banana Onesie": () => true,
   "Basic Dumbo": () => false,
   "Companion Cap": () => false,
   "Dazzling Dumbo": () => false,

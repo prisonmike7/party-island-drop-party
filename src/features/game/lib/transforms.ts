@@ -32,6 +32,8 @@ export function makeGame(farm: any): GameState {
       }),
       {} as Record<InventoryItemName, Decimal>
     ),
+    island: farm.island,
+    home: farm.home,
     createdAt: farm.createdAt,
     chickens: farm.chickens || {},
     stockExpiry: farm.stockExpiry || {},
@@ -70,7 +72,7 @@ export function makeGame(farm: any): GameState {
 
     bumpkin: farm.bumpkin,
     buildings: farm.buildings,
-    fishing: farm.fishing ?? { wharf: {} },
+    fishing: farm.fishing ?? { wharf: {}, beach: {} },
     farmActivity: farm.farmActivity ?? {},
     milestones: farm.milestones ?? {},
     airdrops: farm.airdrops,

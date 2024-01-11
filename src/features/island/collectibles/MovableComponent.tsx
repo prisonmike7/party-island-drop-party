@@ -7,6 +7,8 @@ import {
   CollectibleName,
 } from "features/game/types/craftables";
 
+import { RESOURCE_DIMENSIONS } from "features/game/types/resources";
+
 import { GRID_WIDTH_PX, PIXEL_SCALE } from "features/game/lib/constants";
 import { Context } from "features/game/GameProvider";
 
@@ -33,6 +35,7 @@ import { ZoomContext } from "components/ZoomProvider";
 import { InnerPanel } from "components/ui/Panel";
 import { RemoveKuebikoModal } from "./RemoveKuebikoModal";
 import { hasRemoveRestriction } from "features/game/types/removeables";
+import { CollectibleLocation } from "features/game/types/collectibles";
 
 export const RESOURCE_MOVE_EVENTS: Record<
   ResourceName,
@@ -105,6 +108,7 @@ export interface MovableProps {
   index: number;
   x: number;
   y: number;
+  location?: CollectibleLocation;
 }
 
 const getMovingItem = (state: MachineState) => state.context.moving;
@@ -116,6 +120,7 @@ export const MoveableComponent: React.FC<MovableProps> = ({
   x: coordinatesX,
   y: coordinatesY,
   children,
+  location = "farm",
 }) => {
   const { scale } = useContext(ZoomContext);
 
@@ -174,6 +179,7 @@ export const MoveableComponent: React.FC<MovableProps> = ({
         event: removeAction,
         id: id,
         name: name,
+        location,
       });
     } else {
       setShowRemoveConfirmation(true);
@@ -193,6 +199,7 @@ export const MoveableComponent: React.FC<MovableProps> = ({
     ...BUILDINGS_DIMENSIONS,
     ...COLLECTIBLES_DIMENSIONS,
     ...ANIMAL_DIMENSIONS,
+    ...RESOURCE_DIMENSIONS,
     ...{ Bud: { width: 1, height: 1 } },
   }[name];
 
@@ -202,11 +209,16 @@ export const MoveableComponent: React.FC<MovableProps> = ({
       id,
       name,
     });
-    const collisionDetected = detectCollision(game, {
-      x,
-      y,
-      width: dimensions.width,
-      height: dimensions.height,
+    const collisionDetected = detectCollision({
+      name: name as CollectibleName,
+      state: game,
+      location,
+      position: {
+        x,
+        y,
+        width: dimensions.width,
+        height: dimensions.height,
+      },
     });
 
     setIsColliding(collisionDetected);
@@ -276,11 +288,16 @@ export const MoveableComponent: React.FC<MovableProps> = ({
           id,
           name,
         });
-        const collisionDetected = detectCollision(game, {
-          x,
-          y,
-          width: dimensions.width,
-          height: dimensions.height,
+        const collisionDetected = detectCollision({
+          name: name as CollectibleName,
+          state: game,
+          location,
+          position: {
+            x,
+            y,
+            width: dimensions.width,
+            height: dimensions.height,
+          },
         });
 
         if (!collisionDetected) {
@@ -292,6 +309,8 @@ export const MoveableComponent: React.FC<MovableProps> = ({
               y: coordinatesY + yDiff,
             },
             id,
+            // Resources do not require location to be passed
+            location: name in RESOURCE_MOVE_EVENTS ? undefined : location,
           });
         }
       }}
